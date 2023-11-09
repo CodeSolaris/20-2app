@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 # Set page configuration
 st.set_page_config(
@@ -51,3 +52,22 @@ I'm excited about the prospect of contributing to projects that push the boundar
 st.write(
     "Below you can find some of the apps I have built in Python.Feel free to contact me!"
 )
+
+df = pd.read_csv("data.csv", sep=";")
+
+col1, empty_col, col2 = st.columns([1.5, 0.5, 1.5])
+with col1:
+    for index, row in df[:10].iterrows():
+        st.header(row["title"])
+        st.write(row["description"])
+        st.image("images/" + row["image"])
+        st.write(f"[Source Code]({row['url']})")
+        st.write("")
+
+with col2:
+    for index, row in df[10:].iterrows():
+        st.header(row["title"])
+        st.write(row["description"])
+        st.image("images/" + row["image"])
+        st.write(f"[Source Code]({row['url']})")
+        st.write("")
