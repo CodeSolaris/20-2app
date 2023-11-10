@@ -1,5 +1,5 @@
-import streamlit as st
 import pandas as pd
+import streamlit as st
 
 # Set page configuration
 st.set_page_config(
@@ -56,18 +56,20 @@ st.write(
 df = pd.read_csv("data.csv", sep=";")
 
 col1, empty_col, col2 = st.columns([1.5, 0.5, 1.5])
+
+
+def add_apps_with_description(row):
+    st.header(row["title"])
+    st.write(row["description"])
+    st.image("images/" + row["image"])
+    st.write(f"[Source Code]({row['url']})")
+    st.write("")
+
+
 with col1:
     for index, row in df[:10].iterrows():
-        st.header(row["title"])
-        st.write(row["description"])
-        st.image("images/" + row["image"])
-        st.write(f"[Source Code]({row['url']})")
-        st.write("")
+        add_apps_with_description(row)
 
 with col2:
     for index, row in df[10:].iterrows():
-        st.header(row["title"])
-        st.write(row["description"])
-        st.image("images/" + row["image"])
-        st.write(f"[Source Code]({row['url']})")
-        st.write("")
+        add_apps_with_description(row)
