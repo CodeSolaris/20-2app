@@ -10,10 +10,15 @@ st.write(
 
 # Email input field
 with st.form(key="email_form"):
-    email = st.text_input("Your email address")
-    theme = st.text_input("Theme")
+    user_email = st.text_input("Your email address")
+    raw_message = st.text_area("Your message")
 
-    message = f"Subject: {theme}\n\n{st.text_area("Your message")}\n{email}"
+    message = f"""\
+Subject: new email from {user_email}
+
+From: {user_email}
+{raw_message}
+"""
 
     submit_button = st.form_submit_button("Send Email")
     if submit_button:
